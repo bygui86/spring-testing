@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.rabbit.samples</groupId>
+	<artifactId>employee-service</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
+
+	<name>employee-service</name>
+	<description>Spring Testing sample project - Employee service</description>
+	<url>https://github.com/bygui86/spring-testing</url>
+
+	<organization>
+		<name>MB SOLID Consulting</name>
+		<url>http://mbsolidconsulting.com</url>
+	</organization>
+
+	<contributors>
+		<contributor>
+			<name>Matteo Baiguini</name>
+			<url>https://github.com/bygui86</url>
+		</contributor>
+	</contributors>
+
+	<developers>
+		<developer>
+			<name>Matteo Baiguini</name>
+			<url>https://github.com/bygui86</url>
+		</developer>
+	</developers>
+
+	<scm>
+		<url>https://github.com/bygui86/spring-testing</url>
+		<connection>scm:git:git://github.com/bygui86/spring-testing.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/bygui86/spring-testing.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<properties>
+		<!-- general -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- java -->
+		<java-source.version>1.8</java-source.version>
+		<java-target.version>1.8</java-target.version>
+
+		<!-- maven -->
+		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+
+		<!-- spring -->
+		<spring-boot.version>2.0.4.RELEASE</spring-boot.version>
+
+		<!-- logging -->
+		<slf4.version>1.7.25</slf4.version>
+
+		<!-- others -->
+		<mapstruct.version>1.2.0.Final</mapstruct.version>
+		<lombok.version>1.18.0</lombok.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- spring -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- spring -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
+
+		<!-- database -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+
+		<!-- logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4.version}</version>
+		</dependency>
+
+		<!-- others -->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-jdk8</artifactId>
+			<version>${mapstruct.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- testing -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<!-- general -->
+		<finalName>${project.artifactId}</finalName>
+
+		<!-- plugins -->
+		<plugins>
+			<!-- compiler -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<fork>true</fork>
+					<optimize>true</optimize>
+					<source>${java-source.version}</source>
+					<target>${java-target.version}</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${mapstruct.version}</version>
+						</path>
+					</annotationProcessorPaths>
+					<compilerArgs>
+						<compilerArg>
+							-Amapstruct.unmappedTargetPolicy=WARN
+						</compilerArg>
+						<compilerArg>
+							-Amapstruct.defaultComponentModel=spring
+						</compilerArg>
+					</compilerArgs>
+				</configuration>
+			</plugin>
+
+			<!-- spring-boot -->
+			<!-- see https://docs.spring.io/spring-boot/docs/2.0.3.RELEASE/maven-plugin/run-mojo.html#jvmArguments -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build-info</goal>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<!-- Additional info added to Actuator info -->
+							<additionalProperties>
+								<java.source>${java-source.version}</java.source>
+								<java.target>${java-target.version}</java.target>
+								<build.encoding>${project.build.sourceEncoding}</build.encoding>
+								<reporting.encoding>${project.reporting.outputEncoding}</reporting.encoding>
+							</additionalProperties>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+		<!-- PLEASE NOTE: usage of properties not allowed, probably a bug in JenkinsX -->
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>

@@ -1,0 +1,8 @@
+${Ansi.RED}
+  __ _ _ __ ___  _   _ _ __   _____   _____
+ / _` | '__/ _ \| | | | '_ \ / __\ \ / / __|
+| (_| | | | (_) | |_| | |_) |\__ \\ V / (__
+ \__, |_|  \___/ \__,_| .__(_)___/ \_/ \___|
+ |___/                |_|
+
+${Ansi.GREEN} :: Spring Boot ${Ansi.BLUE}${spring-boot.formatted-version} :: ${Ansi.RED}SrvPID: ${PID} :: ${Ansi.DEFAULT}
