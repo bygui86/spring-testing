@@ -1,0 +1,424 @@
+{
+	"info": {
+		"_postman_id": "931bfe1c-ac9f-430d-8c7f-ac316079335b",
+		"name": "SPRING-TESTING__TEST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "employee-service",
+			"item": [
+				{
+					"name": "Get greetings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e85f9e2f-ff9b-4f2c-b922-368afc9f2bee",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"tests[\"200 OK\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8082",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e85f9e2f-ff9b-4f2c-b922-368afc9f2bee",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"tests[\"200 OK\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8082/info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get employees",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e85f9e2f-ff9b-4f2c-b922-368afc9f2bee",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"tests[\"200 OK\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8082/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get employee by name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b353b119-890c-43e3-bfe8-53ddcc8dbeb4",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"tests[\"200 OK\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8082/employees/name?name=Robert Martin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"employees",
+								"name"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Robert Martin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get employee by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b353b119-890c-43e3-bfe8-53ddcc8dbeb4",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"tests[\"200 OK\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8082/employees/id?id=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"employees",
+								"id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create employee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "92476743-dbed-4596-b802-41f37ba85e4e",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"tests[\"201 CREATED\"] = responseCode.code === 201;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"James Strachan\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "nickname-service",
+			"item": [
+				{
+					"name": "Get greetings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e85f9e2f-ff9b-4f2c-b922-368afc9f2bee",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"tests[\"200 OK\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8083/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e85f9e2f-ff9b-4f2c-b922-368afc9f2bee",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"tests[\"200 OK\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8083/info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get nicknames",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e85f9e2f-ff9b-4f2c-b922-368afc9f2bee",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"tests[\"200 OK\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8083/nicknames",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"nicknames"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get nickname by employee name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e85f9e2f-ff9b-4f2c-b922-368afc9f2bee",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"tests[\"200 OK\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8083/nicknames/employee?employeeName=Robert Martin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"nicknames",
+								"employee"
+							],
+							"query": [
+								{
+									"key": "employeeName",
+									"value": "Robert Martin"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

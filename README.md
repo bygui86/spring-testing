@@ -14,12 +14,12 @@
 
 ## links
 [DONE]
-
-[IN-PROGRESS]
 * unit/integration testing
 	* https://www.baeldung.com/spring-boot-testing
 * tests separation
 	* https://www.testwithspring.com/lesson/running-integration-tests-with-maven/
+
+[IN-PROGRESS]
 
 [TODO]
 * unit/integration testing
@@ -50,3 +50,4 @@
 * https://moelholm.com/2016/10/22/spring-boot-separating-tests/
 * https://stackoverflow.com/questions/47979589/spring-data-jpa-generate-id-on-database-side-only-before-create
 * https://stackoverflow.com/questions/35232827/spring-boot-test-ignores-logging-level
+* https://github.com/spring-cloud/spring-cloud-netflix/issues/1482
