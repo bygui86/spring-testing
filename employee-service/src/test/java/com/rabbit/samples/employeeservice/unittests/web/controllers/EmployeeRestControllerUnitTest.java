@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.IfProfileValue;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -26,7 +25,6 @@ import java.util.Collections;
 import java.util.List;
 
 
-@IfProfileValue(name = "spring.testing.profile", values = {"all", "unit"})
 @RunWith(SpringRunner.class)
 /*
 	To test a Controller, we can use @WebMvcTest: it will auto-configure the Spring MVC infrastructure for our unit test.
@@ -124,7 +122,8 @@ public class EmployeeRestControllerUnitTest {
 				// when
 				.perform(
 						MockMvcRequestBuilders
-								.get("/employees/" + name)
+								.get("/employees/name")
+								.param("name", name)
 								.accept(MediaType.APPLICATION_JSON)
 				)
 
@@ -151,7 +150,7 @@ public class EmployeeRestControllerUnitTest {
 	}
 
 	@Test
-	public void whenPost_thenCreateAndReturnEmployee() throws Exception {
+	public void givenEmployee_whenPost_thenCreateAndReturnEmployee() throws Exception {
 
 		// given
 		final Employee alex = Employee.builder().name(name).build();

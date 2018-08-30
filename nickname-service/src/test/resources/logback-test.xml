@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+	<!-- custom -->
+	<logger name="com.rabbit.samples.nicknameservice" level="error"/>
+
+	<!-- spring-->
+	<logger name="org.springframework" level="error"/>
+
+	<!-- hibernate -->
+	<logger name="org.hibernate" level="error"/>
+</configuration>

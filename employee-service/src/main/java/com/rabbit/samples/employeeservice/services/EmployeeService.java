@@ -9,6 +9,8 @@ public interface EmployeeService {
 
 	List<Employee> getAll();
 
+	Employee getById(final Long id);
+
 	Employee getByName(final String name);
 
 	Employee save(final Employee employee);

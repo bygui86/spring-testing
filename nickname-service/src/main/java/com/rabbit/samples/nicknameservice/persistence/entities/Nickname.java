@@ -1,4 +1,4 @@
-package com.rabbit.samples.employeeservice.persistence.entities;
+package com.rabbit.samples.nicknameservice.persistence.entities;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -28,15 +28,18 @@ import javax.validation.constraints.Size;
 @EqualsAndHashCode
 @Builder
 @Entity
-@Table(name = "employees")
-public class Employee {
+@Table(name = "nicknames")
+public class Nickname {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 
+	// @NotNull
+	Long employeeId;
+
 	@NotEmpty
-	@Size(min = 3, max = 20)
-	String name;
+	@Size(min = 3, max = 15)
+	String nickname;
 
 }

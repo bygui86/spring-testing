@@ -48,3 +48,5 @@
 ## Issues
 * https://github.com/spring-projects/spring-boot/issues/6541
 * https://moelholm.com/2016/10/22/spring-boot-separating-tests/
+* https://stackoverflow.com/questions/47979589/spring-data-jpa-generate-id-on-database-side-only-before-create
+* https://stackoverflow.com/questions/35232827/spring-boot-test-ignores-logging-level

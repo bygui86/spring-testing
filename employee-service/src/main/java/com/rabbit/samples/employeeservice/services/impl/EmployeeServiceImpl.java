@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter(value = AccessLevel.PROTECTED)
 @Service("employeeService")
-// @Transactional
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
@@ -34,17 +35,38 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
+	public Employee getById(final Long id) {
+
+		log.debug("get employee by id {}...", id);
+
+		return getEmployeeRepository()
+				.findById(id)
+				.orElse(createEmptyEmployee());
+	}
+
+	@Override
 	public Employee getByName(final String name) {
 
-		log.debug("get employee for name {}...", name);
+		log.debug("get employee by name {}...", name);
 
-		return getEmployeeRepository().findByName(name);
+		final Employee employee = getEmployeeRepository().findByName(name);
+		if (employee == null) {
+			return createEmptyEmployee();
+		}
+		return employee;
 	}
 
 	@Override
 	public Employee save(final Employee employee) {
 
+		log.debug("post new employee {}...", employee);
+
 		return getEmployeeRepository().save(employee);
+	}
+
+	protected Employee createEmptyEmployee() {
+
+		return Employee.builder().build();
 	}
 
 }

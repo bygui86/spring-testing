@@ -19,10 +19,9 @@ DOCKER_HOST_PORT := 5000
 
 # see https://docs.spring.io/spring-boot/docs/2.0.3.RELEASE/maven-plugin/run-mojo.html#jvmArguments
 MEM_OPTS := -Xms128m -Xmx128m
-JMX_OPTS := -XX:+UnlockCommercialFeatures -XX:+FlightRecorder -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=3$(IMAGE_EXPOSE_PORT_2) -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false
+#JMX_OPTS := -XX:+UnlockCommercialFeatures -XX:+FlightRecorder -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=3$(IMAGE_EXPOSE_PORT_2) -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false
 DEBUG_OPTS := -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
-OTHER_OPTS :=
-# e.g. OTHER_OPTS := -Dspring.profiles.active=insecure,local
+OTHER_OPTS := -Dspring.profiles.active=local
 
 .PHONY: help
 .DEFAULT_GOAL := help
@@ -87,38 +86,38 @@ dependencies :		## Show dependency tree
 
 # CLASS NAME selective run (-Dtest=*UnitTest)
 
-#test :		## Run ALL tests in the application
-#	$(BUILD_TOOL) -DfailIfNoTests=false test
-#
-#unit-test :		## Run ONLY Unit tests in the application
-#	$(BUILD_TOOL) -DfailIfNoTests=false -Dtest=*UnitTest test
-#
-#integration-test :		## Run ONLY Integration tests in the application
-#	$(BUILD_TOOL) -DfailIfNoTests=false -Dtest=*IntegrationTest test
-#
-#contract-test :		## Run ONLY Contract tests in the application
-#	$(BUILD_TOOL) -DfailIfNoTests=false -Dtest=*ContractTest test
-#
-#live-test :		## Run ONLY Live tests in the application
-#	$(BUILD_TOOL) -DfailIfNoTests=false -Dtest=*LiveTest test
+test :		## Run ALL tests in the application
+	$(BUILD_TOOL) -DfailIfNoTests=false -Dtest=*Test test
+
+unit-test :		## Run ONLY Unit tests in the application
+	$(BUILD_TOOL) -DfailIfNoTests=false -Dtest=*UnitTest test
+
+integration-test :		## Run ONLY Integration tests in the application
+	$(BUILD_TOOL) -DfailIfNoTests=false -Dtest=*IntegrationTest test
+
+contract-test :		## Run ONLY Contract tests in the application
+	$(BUILD_TOOL) -DfailIfNoTests=false -Dtest=*ContractTest test
+
+live-test :		## Run ONLY Live tests in the application
+	$(BUILD_TOOL) -DfailIfNoTests=false -Dtest=*LiveTest test
 
 
 # IF-PROFILE-VALUE ANNOTATION selective run (-Dspring.testing.profile=unit)
 
-test :		## Run ALL tests in the application
-	$(BUILD_TOOL) -DfailIfNoTests=false -Dspring.testing.profile=all test
-
-unit-test :		## Run ONLY Unit tests in the application
-	$(BUILD_TOOL) -DfailIfNoTests=false -Dspring.testing.profile=unit test
-
-integration-test :		## Run ONLY Integration tests in the application
-	$(BUILD_TOOL) -DfailIfNoTests=false -Dspring.testing.profile=integration  test
-
-contract-test :		## Run ONLY Contract tests in the application
-	$(BUILD_TOOL) -DfailIfNoTests=false -Dspring.testing.profile=contract test
-
-live-test :		## Run ONLY Live tests in the application
-	$(BUILD_TOOL) -DfailIfNoTests=false -Dspring.testing.profile=live test
+#test :		## Run ALL tests in the application
+#	$(BUILD_TOOL) -DfailIfNoTests=false -Dspring.testing.profile=all test
+#
+#unit-test :		## Run ONLY Unit tests in the application
+#	$(BUILD_TOOL) -DfailIfNoTests=false -Dspring.testing.profile=unit test
+#
+#integration-test :		## Run ONLY Integration tests in the application
+#	$(BUILD_TOOL) -DfailIfNoTests=false -Dspring.testing.profile=integration  test
+#
+#contract-test :		## Run ONLY Contract tests in the application
+#	$(BUILD_TOOL) -DfailIfNoTests=false -Dspring.testing.profile=contract test
+#
+#live-test :		## Run ONLY Live tests in the application
+#	$(BUILD_TOOL) -DfailIfNoTests=false -Dspring.testing.profile=live test
 
 
 # JUNIT-CATEGORY selective run (-Dspring.testing.profile=unit)

@@ -1,4 +1,4 @@
-package com.rabbit.samples.employeeservice.web.dtos;
+package com.rabbit.samples.nicknameservice.web.dtos;
 
 
 import lombok.AccessLevel;

@@ -1,5 +1,4 @@
-package com.rabbit.samples.employeeservice.web.dtos;
-
+package com.rabbit.samples.nicknameservice.feign.dtos;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -7,12 +6,12 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDateTime;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -23,15 +22,12 @@ import java.time.LocalDateTime;
 @ToString
 @EqualsAndHashCode
 @Builder
-public class InfoDto {
+public class EmployeeDto {
 
-	@NonNull
-	int id;
+	Long id;
 
-	@NonNull
+	@NotEmpty
+	@Size(min = 3, max = 20)
 	String name;
-
-	@NonNull
-	LocalDateTime dateTime;
 
 }

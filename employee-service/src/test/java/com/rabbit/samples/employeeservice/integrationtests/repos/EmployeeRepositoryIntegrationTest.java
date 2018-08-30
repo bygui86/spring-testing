@@ -10,15 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.annotation.IfProfileValue;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+// import org.springframework.test.annotation.IfProfileValue;
 
 
 /*
 	Selective test running based on Spring annotation @IfProfileValue
  */
-@IfProfileValue(name = "spring.testing.profile", values = {"all", "integration"})
+// @IfProfileValue(name = "spring.testing.profile", values = {"all", "integration"})
 /*
 	@RunWith is used to provide a bridge between Spring Boot test features and JUnit.
 	PLEASE NOTE: SpringRunner is an alias for SpringJUnit4ClassRunner
