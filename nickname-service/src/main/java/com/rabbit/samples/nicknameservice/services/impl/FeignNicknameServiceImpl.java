@@ -11,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,16 +21,17 @@ import java.util.List;
 @Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter(value = AccessLevel.PROTECTED)
+@Profile("feign")
 @Service("nicknameService")
 @Transactional
-public class NicknameServiceImpl implements NicknameService {
+public class FeignNicknameServiceImpl implements NicknameService {
+
+	@Autowired
+	EmployeeServiceClient employeeServiceClient;
 
 	@Autowired
 	@Qualifier("nicknameRepository")
 	NicknameRepository nicknameRepository;
-
-	@Autowired
-	EmployeeServiceClient employeeServiceClient;
 
 	@Override
 	public List<Nickname> getAll() {
@@ -42,9 +44,9 @@ public class NicknameServiceImpl implements NicknameService {
 	@Override
 	public Nickname getByEmployeeName(final String employeeName) {
 
-		log.debug("get nickname by employeeName {}...", employeeName);
+		log.debug("get nickname by employeeName {} with FEIGN...", employeeName);
 
-		final EmployeeDto employeeDto = getEmployeeServiceClient().getByEmployeeByName(employeeName);
+		final EmployeeDto employeeDto = getEmployeeServiceClient().getEmployeeByName(employeeName);
 		if (employeeDto == null) {
 			return createEmptyNickname();
 		}

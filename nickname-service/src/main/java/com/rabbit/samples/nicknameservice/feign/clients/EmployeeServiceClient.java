@@ -16,7 +16,7 @@ public interface EmployeeServiceClient {
 		OpenFeign DOES NOT infer the parameters name from the parameter itself, so we must specify it in the @RequestParam annotation.
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/employees/name")
-	EmployeeDto getByEmployeeByName(
+	EmployeeDto getEmployeeByName(
 			@RequestParam("name") final String employeeName);
 
 }

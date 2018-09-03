@@ -21,7 +21,7 @@ DOCKER_HOST_PORT := 5000
 MEM_OPTS := -Xms128m -Xmx128m
 #JMX_OPTS := -XX:+UnlockCommercialFeatures -XX:+FlightRecorder -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=3$(IMAGE_EXPOSE_PORT_2) -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false
 DEBUG_OPTS := -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
-OTHER_OPTS := -Dspring.profiles.active=local
+OTHER_OPTS := -Dspring.profiles.active=local,resttemplate
 
 .PHONY: help
 .DEFAULT_GOAL := help
