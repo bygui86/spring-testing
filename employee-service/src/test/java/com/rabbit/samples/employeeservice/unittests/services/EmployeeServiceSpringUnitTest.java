@@ -4,37 +4,29 @@ import com.rabbit.samples.employeeservice.persistence.entities.Employee;
 import com.rabbit.samples.employeeservice.persistence.repos.EmployeeRepository;
 import com.rabbit.samples.employeeservice.services.EmployeeService;
 import com.rabbit.samples.employeeservice.services.impl.EmployeeServiceImpl;
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
 import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
 @RunWith(SpringRunner.class)
+/*
+	To check the Service class, we need to have an instance of Service class created and available as a @Bean so that we can @Autowire it in our test class.
+	This configuration is achieved by using the @TestConfiguration annotation.
+
+	PLEASE NOTE:
+	During component scanning, we might find components or configurations created only for specific tests accidentally get picked up everywhere.
+	To help prevent that, Spring Boot provides @TestConfiguration annotation that can be used on classes in src/test/java to indicate that they should
+	not be picked up by scanning.
+ */
+@Import(EmployeeServiceImpl.class)
 public class EmployeeServiceSpringUnitTest {
-
-	/*
-		To check the Service class, we need to have an instance of Service class created and available as a @Bean so that we can @Autowire it in our test class.
-		This configuration is achieved by using the @TestConfiguration annotation.
-
-		PLEASE NOTE:
-		During component scanning, we might find components or configurations created only for specific tests accidentally get picked up everywhere.
-		To help prevent that, Spring Boot provides @TestConfiguration annotation that can be used on classes in src/test/java to indicate that they should
-		not be picked up by scanning.
-	 */
-	@TestConfiguration
-	@Import(EmployeeServiceImpl.class)
-	static class EmployeeServiceUnitTestContextConfiguration {
-
-		// no-op
-	}
-
 
 	@Autowired
 	private EmployeeService employeeService;
@@ -65,7 +57,8 @@ public class EmployeeServiceSpringUnitTest {
 		final Employee found = employeeService.getByName(name);
 
 		// then
-		Assert.assertEquals(name, found.getName());
+		Assertions.assertThat(found.getName())
+				.isEqualTo(name);
 
 		// verify
 		BDDMockito.verify(employeeRepository, VerificationModeFactory.times(1)).findByName(name);

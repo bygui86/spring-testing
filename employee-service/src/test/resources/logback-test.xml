@@ -9,6 +9,9 @@
 	<!-- spring-->
 	<logger name="org.springframework" level="error"/>
 
-	<!-- hibernate -->
+	<!-- others -->
 	<logger name="org.hibernate" level="error"/>
+	<logger name="org.xnio" level="error"/>
+	<logger name="io.undertow" level="error"/>
+	<logger name="com.zaxxer" level="error"/>
 </configuration>

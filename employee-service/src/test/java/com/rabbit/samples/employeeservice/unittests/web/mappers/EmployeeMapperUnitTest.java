@@ -5,7 +5,7 @@ import com.rabbit.samples.employeeservice.persistence.entities.Employee;
 import com.rabbit.samples.employeeservice.web.dtos.EmployeeDto;
 import com.rabbit.samples.employeeservice.web.mappers.EmployeeMapper;
 import com.rabbit.samples.employeeservice.web.mappers.impl.EmployeeMapperImpl;
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +43,10 @@ public class EmployeeMapperUnitTest {
 		final EmployeeDto dto = employeeMapper.mapEntityToDto(entity);
 
 		// then
-		Assert.assertEquals(id, dto.getId());
-		Assert.assertEquals(name, dto.getName());
+		Assertions.assertThat(dto.getId())
+				.isEqualTo(id);
+		Assertions.assertThat(dto.getName())
+				.isEqualTo(name);
 	}
 
 	@Test
@@ -57,8 +59,10 @@ public class EmployeeMapperUnitTest {
 		final Employee entity = employeeMapper.mapDtoToEntity(dto);
 
 		// then
-		Assert.assertEquals(id, entity.getId());
-		Assert.assertEquals(name, entity.getName());
+		Assertions.assertThat(entity.getId())
+				.isEqualTo(id);
+		Assertions.assertThat(entity.getName())
+				.isEqualTo(name);
 	}
 
 }

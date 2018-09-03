@@ -3,33 +3,23 @@ package com.rabbit.samples.employeeservice.integrationtests.services;
 import com.rabbit.samples.employeeservice.persistence.entities.Employee;
 import com.rabbit.samples.employeeservice.services.EmployeeService;
 import com.rabbit.samples.employeeservice.services.impl.EmployeeServiceImpl;
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 
 @RunWith(SpringRunner.class)
+@Import(EmployeeServiceImpl.class)
 @DataJpaTest
 @Transactional
 public class EmployeeServiceIntegrationTest {
-
-	@TestConfiguration
-	@Import({
-			EmployeeServiceImpl.class
-	})
-	static class EmployeeServiceUnitTestContextConfiguration {
-
-		// no-op
-	}
-
 
 	@Autowired
 	private EmployeeService employeeService;
@@ -56,7 +46,8 @@ public class EmployeeServiceIntegrationTest {
 		final Employee entity = employeeService.getByName(name);
 
 		// then
-		Assert.assertEquals(name, entity.getName());
+		Assertions.assertThat(entity.getName())
+				.isEqualTo(name);
 	}
 
 }

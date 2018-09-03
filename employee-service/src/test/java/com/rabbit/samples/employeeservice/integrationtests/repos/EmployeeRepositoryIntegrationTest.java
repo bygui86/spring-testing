@@ -2,7 +2,7 @@ package com.rabbit.samples.employeeservice.integrationtests.repos;
 
 import com.rabbit.samples.employeeservice.persistence.entities.Employee;
 import com.rabbit.samples.employeeservice.persistence.repos.EmployeeRepository;
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,7 +67,8 @@ public class EmployeeRepositoryIntegrationTest {
 		final Employee entity = employeeRepository.findByName(name);
 
 		// then
-		Assert.assertEquals(name, entity.getName());
+		Assertions.assertThat(entity.getName())
+				.isEqualTo(name);
 	}
 
 }
