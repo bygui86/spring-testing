@@ -27,6 +27,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.match.MockRestRequestMatchers;
 import org.springframework.test.web.client.response.MockRestResponseCreators;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 
@@ -58,8 +59,14 @@ public class RestTemplateNicknameServiceUnitTest {
 	@Value("${rest.client.protocol}")
 	private String protocol;
 
-	@Value("${employee.service.root.url}")
-	private String rootUrl;
+	@Value("${rest.client.url.encoding}")
+	private String urlEncoding;
+
+	@Value("${employee.service.host}")
+	private String host;
+
+	@Value("${employee.service.port}")
+	private int port;
 
 	@After
 	public void after() {
@@ -68,7 +75,7 @@ public class RestTemplateNicknameServiceUnitTest {
 	}
 
 	@Test
-	public void givenEmployeeName_whenGetNickname_thenReturnNickname() throws JsonProcessingException {
+	public void givenEmployeeName_whenGetNickname_thenReturnNickname() throws JsonProcessingException, UnsupportedEncodingException {
 
 		// given
 		final Long employeeId = 1L;
@@ -79,7 +86,7 @@ public class RestTemplateNicknameServiceUnitTest {
 		final String nicknameStr = "Uncle Bob";
 		final Nickname nickname = Nickname.builder().id(nicknameId).employeeId(employeeId).nickname(nicknameStr).build();
 
-		final String url = getRootUrl() + "/employees/name?name=" + URLEncoder.encode(employeeName);
+		final String url = getRootUrl() + "/employees/name?name=" + URLEncoder.encode(employeeName, urlEncoding);
 
 		mockRestServiceServer
 				.expect(
@@ -123,7 +130,7 @@ public class RestTemplateNicknameServiceUnitTest {
 
 	private String getRootUrl() {
 
-		return protocol + "://" + rootUrl;
+		return protocol + "://" + host + ":" + port;
 	}
 
 }

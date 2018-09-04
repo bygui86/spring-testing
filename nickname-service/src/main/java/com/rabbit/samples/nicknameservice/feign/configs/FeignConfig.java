@@ -1,4 +1,4 @@
-package com.rabbit.samples.nicknameservice.configs;
+package com.rabbit.samples.nicknameservice.feign.configs;
 
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Configuration;

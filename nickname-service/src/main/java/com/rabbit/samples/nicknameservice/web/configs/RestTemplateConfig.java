@@ -1,5 +1,4 @@
-package com.rabbit.samples.nicknameservice.configs;
-
+package com.rabbit.samples.nicknameservice.web.configs;
 
 import lombok.AccessLevel;
 import lombok.Getter;

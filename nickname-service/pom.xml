@@ -63,6 +63,9 @@
 		<!-- others -->
 		<mapstruct.version>1.2.0.Final</mapstruct.version>
 		<lombok.version>1.18.0</lombok.version>
+
+		<!-- testing -->
+		<mockserver-netty.version>5.4.1</mockserver-netty.version>
 	</properties>
 
 	<dependencyManagement>
@@ -154,6 +157,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mock-server</groupId>
+			<artifactId>mockserver-netty</artifactId>
+			<version>${mockserver-netty.version}</version>
 		</dependency>
 	</dependencies>
 
