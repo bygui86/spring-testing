@@ -228,11 +228,24 @@
 				<version>${spring-cloud-contract.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<!-- TODO to be tested-->
-					<!--<packageWithBaseClasses></packageWithBaseClasses>-->
-					<!--<basePackageForTests></basePackageForTests>-->
-					<!-- TODO multiple different tests? -->
-					<baseClassForTests>com.rabbit.samples.employeeservice.contracttests.AbstractRestControllerContractTest</baseClassForTests>
+					<nameSuffixForTests>ContractTest</nameSuffixForTests>
+
+					<!-- Different base classes for contracts - by mapping -->
+					<!-- PLEASE NOTE: This rule takes precedence over baseClassForTests and packageWithBaseClasses -->
+					<baseClassMappings>
+						<baseClassMapping>
+							<contractPackageRegex>.*info.*</contractPackageRegex>
+							<baseClassFQN>com.rabbit.samples.employeeservice.contracttests.basepackage.InfoBase</baseClassFQN>
+						</baseClassMapping>
+					</baseClassMappings>
+
+					<!-- Different base classes for contracts - by convention -->
+					<!-- PLEASE NOTE: This rule takes precedence over baseClassForTests -->
+					<packageWithBaseClasses>com.rabbit.samples.employeeservice.contracttests.basepackage</packageWithBaseClasses>
+
+					<!-- By providing the baseClassForTests, we have a fallback in case mappings did not succeed. -->
+					<baseClassForTests>com.rabbit.samples.employeeservice.contracttests.GenericBase</baseClassForTests>
+
 				</configuration>
 			</plugin>
 		</plugins>

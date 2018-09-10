@@ -1,4 +1,4 @@
-package contracts
+package contracts.employees
 
 import org.springframework.cloud.contract.spec.Contract
 import org.springframework.http.HttpHeaders

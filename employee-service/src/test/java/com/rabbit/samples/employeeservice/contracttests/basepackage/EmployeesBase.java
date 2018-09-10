@@ -1,7 +1,6 @@
-package com.rabbit.samples.employeeservice.contracttests;
+package com.rabbit.samples.employeeservice.contracttests.basepackage;
 
 import com.rabbit.samples.employeeservice.web.controllers.EmployeeRestController;
-import com.rabbit.samples.employeeservice.web.controllers.GreetingsRestController;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -13,14 +12,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 
+/*
+	See https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#maven-different-base
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMessageVerifier
 @DirtiesContext
-public abstract class AbstractRestControllerContractTest {
-
-	@Autowired
-	private GreetingsRestController greetingsRestController;
+public abstract class EmployeesBase {
 
 	@Autowired
 	private EmployeeRestController employeeRestController;
@@ -30,7 +29,6 @@ public abstract class AbstractRestControllerContractTest {
 
 		RestAssuredMockMvc.standaloneSetup(
 				MockMvcBuilders.standaloneSetup(
-						greetingsRestController,
 						employeeRestController
 				)
 		);
