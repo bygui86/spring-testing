@@ -44,11 +44,17 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 	* https://cloud.spring.io/spring-cloud-contract/
 	* https://spring.io/guides/gs/contract-rest
 	* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html
+	* multiple base classes
+		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#maven-different-base
+	* dsl
+		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#contract-dsl
+	* multiple contracts in one file
+		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#_multiple_contracts_in_one_file
 
 [IN-PROGRESS]
 * contract testing
-	* multiple base classes
-		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#maven-different-base
+	* publishing to repo
+		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#maven-pushing-stubs-to-scm
 
 [TODO]
 * unit/integration testing
@@ -59,8 +65,6 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 * contract testing
 	* multiple consumers
 		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#_stubs_per_consumer
-	* multiple contracts in one file
-		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#_multiple_contracts_in_one_file
 	* stub runner for messaging
 		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#stub-runner-for-messaging
 * wiremock
