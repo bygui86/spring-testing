@@ -8,8 +8,7 @@ Contract.make {
 	// ignored
 
 	// The name of the test method can be inferred either by the name of the file or by the name attribute like here below
-	// name "greetings"
-
+	name "getGreetings"
 	description "should return greetings as string"
 
 	request {
@@ -19,7 +18,9 @@ Contract.make {
 
 	response {
 		status 200
-		body("Greetings from employee-service ;)")
+		body(
+				"Greetings from employee-service ;)"
+		)
 	}
 
 }
