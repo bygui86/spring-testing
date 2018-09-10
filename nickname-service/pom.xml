@@ -66,6 +66,7 @@
 
 		<!-- testing -->
 		<mockserver-netty.version>5.4.1</mockserver-netty.version>
+		<spring-cloud-contract.version>2.0.1.RELEASE</spring-cloud-contract.version>
 	</properties>
 
 	<dependencyManagement>
@@ -156,6 +157,21 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!--
+			PLEASE NOTE:
+			This dependency includes a shaded uber jar which might cause some dependency conflicts with your compile classpath stuff.
+			In that case you could configure the maven surefire plugin with exclusions
+		 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-contract-wiremock</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

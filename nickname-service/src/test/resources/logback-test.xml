@@ -15,4 +15,7 @@
 	<logger name="io.undertow" level="error"/>
 	<logger name="com.zaxxer" level="error"/>
 	<logger name="org.mockserver" level="error"/>
+	<logger name="com.netflix" level="error"/>
+	<logger name="wiremock" level="error"/>
+	<logger name="com.github" level="error"/>
 </configuration>

@@ -64,19 +64,19 @@ print-variables :		## Print variables values
 # BUILDING
 
 build :		## Build the application including UnitTests
-	$(BUILD_TOOL) -Dspring.testing.profile=unit -DfailIfNoTests=false package
+	$(BUILD_TOOL) -Dtest=*UnitTest -DfailIfNoTests=false package
 
 build-no-tests :		## Build the application excluding tests
-	$(BUILD_TOOL) package -DskipTests
+	$(BUILD_TOOL) install -DskipTests
 
 clean :		## Clean the application
 	$(BUILD_TOOL) clean
 
 clean-build :		## Clean and Build the application excluding tests
-	$(BUILD_TOOL) -Dspring.testing.profile=unit -DfailIfNoTests=false clean package
+	$(BUILD_TOOL) -Dtest=*UnitTest -DfailIfNoTests=false clean package
 
 clean-build-no-tests :		## Clean and Build the application excluding tests
-	$(BUILD_TOOL) clean package -DskipTests
+	$(BUILD_TOOL) clean install -DskipTests
 
 install : clean-build		## Install the library into maven repo
 	$(BUILD_TOOL) install
@@ -101,10 +101,6 @@ integration-test :		## Run ONLY Integration tests in the application
 contract-test :		## Run ONLY Contract tests in the application
 	$(BUILD_TOOL) -DfailIfNoTests=false -Dtest=*ContractTest test
 
-live-test :		## Run ONLY Live tests in the application
-	$(BUILD_TOOL) -DfailIfNoTests=false -Dtest=*LiveTest test
-
-
 # IF-PROFILE-VALUE ANNOTATION selective run (-Dspring.testing.profile=unit)
 
 #test :		## Run ALL tests in the application
@@ -118,10 +114,6 @@ live-test :		## Run ONLY Live tests in the application
 #
 #contract-test :		## Run ONLY Contract tests in the application
 #	$(BUILD_TOOL) -DfailIfNoTests=false -Dspring.testing.profile=contract test
-#
-#live-test :		## Run ONLY Live tests in the application
-#	$(BUILD_TOOL) -DfailIfNoTests=false -Dspring.testing.profile=live test
-
 
 # JUNIT-CATEGORY selective run (-Dspring.testing.profile=unit)
 # see
@@ -147,7 +139,7 @@ java-debug :		## Run the application in debug mode through the generated fat-jar
 # DOCKER
 
 docker-prepare :		## Prepare application to be containerised
-	$(BUILD_TOOL) -DfailIfNoTests=false clean package
+	$(BUILD_TOOL) -Dtest=*UnitTest -DfailIfNoTests=false clean package
 
 docker-build : docker-prepare		## Build docker image
 	docker build -t $(IMAGE_NAME):$(IMAGE_TAG) .

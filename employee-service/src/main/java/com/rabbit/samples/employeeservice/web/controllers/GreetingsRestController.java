@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Getter(value = AccessLevel.PROTECTED)
 @RestController("greetingsRestController")
 @RequestMapping("/")
-class GreetingsRestController {
+public class GreetingsRestController {
 
 	@Value("${spring.application.name}")
 	String appName;

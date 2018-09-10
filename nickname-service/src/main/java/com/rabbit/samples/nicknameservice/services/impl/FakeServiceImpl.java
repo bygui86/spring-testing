@@ -2,12 +2,12 @@ package com.rabbit.samples.nicknameservice.services.impl;
 
 import com.rabbit.samples.nicknameservice.feign.dtos.EmployeeDto;
 import com.rabbit.samples.nicknameservice.persistence.entities.Nickname;
+import com.rabbit.samples.nicknameservice.services.FakeService;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestClientException;
@@ -24,12 +24,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Getter(value = AccessLevel.PROTECTED)
 @Service("fakeService")
 @Transactional
-public class FakeServiceImpl {
+public class FakeServiceImpl implements FakeService {
 
 	@Autowired
-	@Qualifier("restTemplate")
 	RestTemplate restTemplate;
 
+	@Override
 	public String getFakeString() {
 
 		log.debug("get fake string...");
@@ -40,6 +40,7 @@ public class FakeServiceImpl {
 		return getRestTemplate().getForObject(url, String.class);
 	}
 
+	@Override
 	public String postFakeString(final String comment) {
 
 		log.debug("post fake string {}...", comment);
@@ -60,7 +61,7 @@ public class FakeServiceImpl {
 		}
 	}
 
-
+	@Override
 	public Nickname getFakeNickname(final String employeeName) {
 
 		log.debug("get fake nickname by employeeName {} with REST-TEMPLATE...", employeeName);

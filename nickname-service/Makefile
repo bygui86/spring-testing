@@ -78,6 +78,9 @@ clean-build :		## Clean and Build the application excluding tests
 clean-build-no-tests :		## Clean and Build the application excluding tests
 	$(BUILD_TOOL) clean package -DskipTests
 
+install : clean-build		## Install the library into maven repo
+	$(BUILD_TOOL) install
+
 dependencies :		## Show dependency tree
 	$(BUILD_TOOL) dependency:tree -Dverbose
 
@@ -98,10 +101,6 @@ integration-test :		## Run ONLY Integration tests in the application
 contract-test :		## Run ONLY Contract tests in the application
 	$(BUILD_TOOL) -DfailIfNoTests=false -Dtest=*ContractTest test
 
-live-test :		## Run ONLY Live tests in the application
-	$(BUILD_TOOL) -DfailIfNoTests=false -Dtest=*LiveTest test
-
-
 # IF-PROFILE-VALUE ANNOTATION selective run (-Dspring.testing.profile=unit)
 
 #test :		## Run ALL tests in the application
@@ -115,10 +114,6 @@ live-test :		## Run ONLY Live tests in the application
 #
 #contract-test :		## Run ONLY Contract tests in the application
 #	$(BUILD_TOOL) -DfailIfNoTests=false -Dspring.testing.profile=contract test
-#
-#live-test :		## Run ONLY Live tests in the application
-#	$(BUILD_TOOL) -DfailIfNoTests=false -Dspring.testing.profile=live test
-
 
 # JUNIT-CATEGORY selective run (-Dspring.testing.profile=unit)
 # see

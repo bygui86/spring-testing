@@ -42,9 +42,11 @@ public class EmployeeRestControllerUnitTest {
 	private MockMvc mockMvc;
 
 	@MockBean(name = "employeeService")
+	// @SpyBean(name = "employeeService")
 	private EmployeeService employeeService;
 
 	@MockBean
+	// @SpyBean
 	private EmployeeMapper employeeMapper;
 
 	final String name = "alex";

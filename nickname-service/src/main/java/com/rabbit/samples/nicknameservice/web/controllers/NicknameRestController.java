@@ -45,7 +45,7 @@ public class NicknameRestController {
 	}
 
 	@GetMapping("/employee")
-	public NicknameDto getByEmployeeNameWithFeign(
+	public NicknameDto getByEmployeeName(
 			@RequestParam final String employeeName) {
 
 		log.debug("get nickname by employeeName {}...", employeeName);

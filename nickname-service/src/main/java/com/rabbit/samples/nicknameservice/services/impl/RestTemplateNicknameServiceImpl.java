@@ -43,7 +43,6 @@ public class RestTemplateNicknameServiceImpl implements NicknameService {
 	String charEncoding;
 
 	@Autowired
-	@Qualifier("restTemplate")
 	RestTemplate restTemplate;
 
 	@Autowired

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +35,14 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @DataJpaTest
 @Transactional
+/*
+	In the unlikely case that a test corrupts the application context and requires reloading — for example, by modifying a bean definition or the state of
+	an application object — you can annotate your test class or test method with @DirtiesContext.
+	This instructs Spring to remove the context from the cache and rebuild the application context before executing the next test.
+	Note that support for the @DirtiesContext annotation is provided by the DirtiesContextBeforeModesTestExecutionListener and the
+	DirtiesContextTestExecutionListener which are enabled by default.
+ */
+@DirtiesContext
 public class EmployeeRepositoryIntegrationTest {
 
 	@Autowired

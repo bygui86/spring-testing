@@ -30,7 +30,7 @@ public class RestTemplateConfig {
 	@Value("${rest.client.request.read.timeout:10000}")
 	int readTimeout;
 
-	@Bean("restTemplate")
+	@Bean
 	public RestTemplate createRestTemplate() {
 
 		log.debug("Creating RestTemplate...");

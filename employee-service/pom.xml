@@ -52,6 +52,7 @@
 
 		<!-- spring -->
 		<spring-boot.version>2.0.4.RELEASE</spring-boot.version>
+		<spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
 
 		<!-- logging -->
 		<slf4.version>1.7.25</slf4.version>
@@ -59,6 +60,9 @@
 		<!-- others -->
 		<mapstruct.version>1.2.0.Final</mapstruct.version>
 		<lombok.version>1.18.0</lombok.version>
+
+		<!-- testing -->
+		<spring-cloud-contract.version>2.0.1.RELEASE</spring-cloud-contract.version>
 	</properties>
 
 	<dependencyManagement>
@@ -71,6 +75,14 @@
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
+			<!-- spring-cloud -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -79,6 +91,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -135,6 +148,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-contract-verifier</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -201,6 +219,21 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+
+			<!-- spring-cloud-contract -->
+			<plugin>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
+				<version>${spring-cloud-contract.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<!-- TODO to be tested-->
+					<!--<packageWithBaseClasses></packageWithBaseClasses>-->
+					<!--<basePackageForTests></basePackageForTests>-->
+					<!-- TODO multiple different tests? -->
+					<baseClassForTests>com.rabbit.samples.employeeservice.contracttests.AbstractRestControllerContractTest</baseClassForTests>
+				</configuration>
 			</plugin>
 		</plugins>
 

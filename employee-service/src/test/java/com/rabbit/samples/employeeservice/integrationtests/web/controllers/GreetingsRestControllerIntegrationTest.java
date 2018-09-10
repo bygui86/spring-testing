@@ -18,6 +18,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 		/*
 			The webEnvironment attribute configures our runtime environment.
 			Here we are using WebEnvironment.DEFINED_PORT, so that the container will operate as normal.
+
+			PLEASE NOTE:
+			If we would like to use a SpringBootTest.WebEnvironment.RANDOM_PORT, we can inject the randomy generated port like following
+				@LocalServerPort
+				private int port;
 		 */
 		webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
 		classes = EmployeeServiceApplication.class

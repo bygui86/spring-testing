@@ -35,23 +35,34 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 	* feign client
 		* https://stackoverflow.com/questions/34397570/mock-an-eureka-feign-client-for-unittesting
 		* https://www.blazemeter.com/blog/Rest-API-testing-with-Spring-Cloud-Feign-Clients
+	* https://www.baeldung.com/integration-testing-in-spring
+	* https://www.baeldung.com/spring-webappconfiguration
+	* https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html
+* contract testing
+	* https://martinfowler.com/articles/consumerDrivenContracts.html
+	* https://www.baeldung.com/spring-cloud-contract
+	* https://cloud.spring.io/spring-cloud-contract/
+	* https://spring.io/guides/gs/contract-rest
+	* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html
 
 [IN-PROGRESS]
-* unit/integration testing
-	* https://www.baeldung.com/integration-testing-in-spring
+* contract testing
+	* multiple base classes
+		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#maven-different-base
 
 [TODO]
 * unit/integration testing
-	* https://dzone.com/articles/how-to-mock-spring-bean-version-2
 	* https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html
-	* https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html
+	* https://dzone.com/articles/how-to-mock-spring-bean-version-2
 	* feign client
 		* https://github.com/velo/feign-mock
 * contract testing
-	* https://cloud.spring.io/spring-cloud-contract/
-	* https://spring.io/guides/gs/contract-rest/
-	* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html
-	* https://www.baeldung.com/spring-cloud-contract
+	* multiple consumers
+		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#_stubs_per_consumer
+	* multiple contracts in one file
+		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#_multiple_contracts_in_one_file
+	* stub runner for messaging
+		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#stub-runner-for-messaging
 * wiremock
 	* http://wiremock.org/docs/stubbing/
 	* https://www.youtube.com/watch?v=x3MvZ8DFrpE&feature=youtu.be
@@ -69,6 +80,9 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 ---
 
 ## Repos
+* https://github.com/spring-cloud-samples/spring-cloud-contract-samples/
+	* https://github.com/spring-cloud-samples/spring-cloud-contract-samples/tree/master/consumer
+	* https://github.com/spring-cloud-samples/spring-cloud-contract-samples/tree/master/producer
 * https://github.com/hamvocke/spring-testing
 * https://github.com/importsource/spring-cloud-contract
 * https://github.com/paolocarta/spring-cloud-contract-demo
