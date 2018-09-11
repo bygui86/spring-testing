@@ -17,6 +17,12 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 
 ---
 
+## Related repos
+
+* [spring-testing-contracts-stubs](https://github.com/bygui86/spring-testing-contracts-stubs)
+
+---
+
 ## links
 [DONE]
 * theory
@@ -50,11 +56,15 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#contract-dsl
 	* multiple contracts in one file
 		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#_multiple_contracts_in_one_file
+	* pushing to repo
+		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#maven-pushing-stubs-to-scm
+* maven properties
+	* https://books.sonatype.com/mvnref-book/reference/resource-filtering-sect-properties.html
 
 [IN-PROGRESS]
 * contract testing
-	* publishing to repo
-		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#maven-pushing-stubs-to-scm
+	* pulling from repo
+		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#scm-stub-downloader
 
 [TODO]
 * unit/integration testing

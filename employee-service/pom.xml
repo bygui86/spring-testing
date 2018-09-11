@@ -228,11 +228,52 @@
 				<version>${spring-cloud-contract.version}</version>
 				<extensions>true</extensions>
 				<configuration>
+					<!-- general -->
 					<nameSuffixForTests>ContractTest</nameSuffixForTests>
+
+
+					<!-- repo -->
+
+					<!-- We want to pick contracts from a Git repository -->
+					<!-- via FILE - STILL TO BE TESTED -->
+					<!--<contractsRepositoryUrl>file://${env.ROOT}/contracts-stubs</contractsRepositoryUrl>-->
+					<!--<contractsRepositoryUrl>git://file://${env.ROOT}/contracts-stubs</contractsRepositoryUrl>-->
+					<!-- via GIT protocol -->
+					<!-- /!\   WARNING: you need a already setup ssh-key locally and on GitHub   /!\ -->
+					<contractsRepositoryUrl>git://git@github.com:bygui86/spring-testing-contracts-stubs.git</contractsRepositoryUrl>
+					<!-- via HTTP protocol -->
+					<!-- /!\   WARNING: you need an already setup environment variables locally: MAVEN_GIT_USERNAME and MAVEN_GIT_PASSWORD   /!\ -->
+					<!--<contractsRepositoryUrl>git://https://github.com/bygui86/spring-testing-contracts-stubs.git</contractsRepositoryUrl>-->
+					<!--<contractsRepositoryUsername>${env.MAVEN_GIT_USERNAME}</contractsRepositoryUsername>-->
+					<!--<contractsRepositoryPassword>${env.MAVEN_GIT_PASSWORD}</contractsRepositoryPassword>-->
+
+					<!--
+						We reuse the contract dependency section to set up the path to the folder that contains the contract definitions.
+						In our case the path will be /groupId/artifactId/version/contracts
+					 -->
+					<contractDependency>
+						<groupId>${project.groupId}</groupId>
+						<artifactId>${project.artifactId}</artifactId>
+						<version>${project.version}</version>
+					</contractDependency>
+
+					<!-- The contracts mode can't be classpath -->
+					<contractsMode>REMOTE</contractsMode>
+
+
+					<!-- base class mappings -->
 
 					<!-- Different base classes for contracts - by mapping -->
 					<!-- PLEASE NOTE: This rule takes precedence over baseClassForTests and packageWithBaseClasses -->
 					<baseClassMappings>
+						<baseClassMapping>
+							<contractPackageRegex>.*employee.*</contractPackageRegex>
+							<baseClassFQN>com.rabbit.samples.employeeservice.contracttests.basepackage.EmployeesBase</baseClassFQN>
+						</baseClassMapping>
+						<baseClassMapping>
+							<contractPackageRegex>.*greetings.*</contractPackageRegex>
+							<baseClassFQN>com.rabbit.samples.employeeservice.contracttests.basepackage.GreetingsBase</baseClassFQN>
+						</baseClassMapping>
 						<baseClassMapping>
 							<contractPackageRegex>.*info.*</contractPackageRegex>
 							<baseClassFQN>com.rabbit.samples.employeeservice.contracttests.basepackage.InfoBase</baseClassFQN>
@@ -241,12 +282,23 @@
 
 					<!-- Different base classes for contracts - by convention -->
 					<!-- PLEASE NOTE: This rule takes precedence over baseClassForTests -->
-					<packageWithBaseClasses>com.rabbit.samples.employeeservice.contracttests.basepackage</packageWithBaseClasses>
+					<!-- /!\   WARNING: This rule does not work well retrieving contracts from repo   /!\ -->
+					<!--<packageWithBaseClasses>com.rabbit.samples.employeeservice.contracttests.basepackage</packageWithBaseClasses>-->
 
-					<!-- By providing the baseClassForTests, we have a fallback in case mappings did not succeed. -->
+					<!-- Fallback - Providing the baseClassForTests, we have a fallback in case mappings did not succeed. -->
 					<baseClassForTests>com.rabbit.samples.employeeservice.contracttests.GenericBase</baseClassForTests>
 
 				</configuration>
+				<executions>
+					<execution>
+						<!--<phase>package</phase>-->
+						<phase>install</phase>
+						<goals>
+							<!-- By default we will not push the stubs back to SCM, you have to explicitly add it as a goal -->
+							<goal>pushStubsToScm</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 

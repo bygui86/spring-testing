@@ -27,7 +27,6 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @AutoConfigureWebClient(registerRestTemplate = true)
 @AutoConfigureStubRunner(
-		ids = "com.rabbit.samples:employee-service:+:stubs:8082",
 		/*
 			This enum indicates from where to take the stubs.
 
@@ -35,15 +34,15 @@ import java.util.List;
 			. spring-cloud-contract 1.2.x > workOffline = true
 			. spring-cloud-contract 2.0.x > stubsMode = StubRunnerProperties.StubsMode.LOCAL
 		 */
-		stubsMode = StubRunnerProperties.StubsMode.LOCAL
+		stubsMode = StubRunnerProperties.StubsMode.LOCAL,
+		ids = "com.rabbit.samples:employee-service:+:stubs:8082"
 )
 @TestPropertySource(
 		locations = {
-				"classpath:application.properties",
-				"classpath:application-resttemplate.properties"
+				"classpath:application.properties"
 		}
 )
-public class EmployeeServiceContractTest {
+public class LocalEmployeeServiceContractTest {
 
 	/*
 		Alternative to @AutoConfigureStubRunner annotation
