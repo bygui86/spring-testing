@@ -43,11 +43,15 @@ out/
 .externalToolBuilders/
 .metadata*/
 .recommenders/
+.settings/
 eclipsebin/
 RemoteSystemsTempFiles/
+.project
+.classpath
 
 ########### Visual Studio Code
 *.code-workspace
+.factorypath
 
 
 
