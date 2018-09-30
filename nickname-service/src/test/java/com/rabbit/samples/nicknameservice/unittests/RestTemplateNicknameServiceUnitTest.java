@@ -31,6 +31,20 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 
+/*
+	PLEASE NOTE:
+	If in the class under test we would like to use a customised RestTemplate, we could setup the test this way:
+		. comment these annotations
+			@AutoConfigureWebClient(registerRestTemplate = true)
+			@AutoConfigureMockRestServiceServer
+		. the MockRestServiceServer is not injected anymore, so comment the @Autowired
+		. define somewhere (Configuration class, directly in this test, ...) the customised RestTemplate to be used
+		. create a @Before method to manually create the MockRestServiceServer assigning the customised RestTemplate
+			@Before
+			public void setup() {
+				mockRestServiceServer = MockRestServiceServer.bindTo(outboundRestTemplate).build();
+			}
+ */
 @RunWith(SpringRunner.class)
 @AutoConfigureWebClient(registerRestTemplate = true)
 @AutoConfigureMockRestServiceServer

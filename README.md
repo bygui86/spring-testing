@@ -44,6 +44,11 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 	* https://www.baeldung.com/integration-testing-in-spring
 	* https://www.baeldung.com/spring-webappconfiguration
 	* https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html
+	* web
+		* https://docs.spring.io/spring-security/site/docs/current/reference/html/test-mockmvc.html
+	* configurations
+		* https://www.baeldung.com/spring-webappconfiguration
+	    * https://stackoverflow.com/questions/42912616/spring-test-context-best-practice
 * contract testing
 	* https://martinfowler.com/articles/consumerDrivenContracts.html
 	* https://www.baeldung.com/spring-cloud-contract
@@ -64,7 +69,8 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 	* https://books.sonatype.com/mvnref-book/reference/resource-filtering-sect-properties.html
 
 [IN-PROGRESS]
-
+* security config testing
+	* ?
 
 [TODO]
 * unit/integration testing
@@ -77,6 +83,9 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#_stubs_per_consumer
 	* stub runner for messaging
 		* https://cloud.spring.io/spring-cloud-contract/single/spring-cloud-contract.html#stub-runner-for-messaging
+* security testing
+	* https://www.baeldung.com/spring-security-integration-tests
+	* https://docs.spring.io/spring-security/site/docs/current/reference/html/test-method.html
 * wiremock
 	* http://wiremock.org/docs/stubbing/
 	* https://www.youtube.com/watch?v=x3MvZ8DFrpE&feature=youtu.be

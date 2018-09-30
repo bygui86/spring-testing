@@ -51,13 +51,8 @@ public class EmployeeRestControllerUnitTest {
 
 	final String name = "alex";
 
-	public void before() {
-
-	}
-
 	@Test
-	public void whenGetAll_thenReturnGivenEmployees()
-			throws Exception {
+	public void whenGetAll_thenReturnGivenEmployees() throws Exception {
 
 		// given
 		final Employee alex = Employee.builder().name(name).build();
@@ -159,7 +154,11 @@ public class EmployeeRestControllerUnitTest {
 		final EmployeeDto alexDto = EmployeeDto.builder().name(name).build();
 
 		BDDMockito
-				.given(employeeService.save(BDDMockito.any()))
+				/*
+					PLEASE NOTE:
+					If the object does not implement the equals and hashCode methods, this could lead to problems during mocking.
+				 */
+				.given(employeeService.save(alex))
 				.willReturn(alex);
 
 		BDDMockito
@@ -198,7 +197,7 @@ public class EmployeeRestControllerUnitTest {
 		;
 
 		// verify
-		BDDMockito.verify(employeeService, VerificationModeFactory.times(1)).save(BDDMockito.any());
+		BDDMockito.verify(employeeService, VerificationModeFactory.times(1)).save(alex);
 		BDDMockito.reset(employeeService);
 	}
 
