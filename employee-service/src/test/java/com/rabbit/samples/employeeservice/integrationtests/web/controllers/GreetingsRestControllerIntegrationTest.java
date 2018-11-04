@@ -5,9 +5,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -15,21 +15,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(
-		/*
-			The webEnvironment attribute configures our runtime environment.
-			Here we are using WebEnvironment.DEFINED_PORT, so that the container will operate as normal.
-
-			PLEASE NOTE:
-			If we would like to use a SpringBootTest.WebEnvironment.RANDOM_PORT, we can inject the randomy generated port like following
-				@LocalServerPort
-				private int port;
-		 */
 		webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
 		classes = EmployeeServiceApplication.class
 )
 public class GreetingsRestControllerIntegrationTest {
 
-	@Value("${server.port}")
+	// alternative to @Value("${server.port}"), use following
+	@LocalServerPort
 	int serverPort;
 
 	String url;

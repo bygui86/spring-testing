@@ -17,6 +17,16 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 
 ---
 
+## TODOs
+* config tests
+* security config tests
+* startup tests
+* remove "reset(..)" from all tests (deprecated and not best pratice)
+* mutation testing
+* random testing
+
+---
+
 ## Related repos
 
 * [spring-testing-contracts-stubs](https://github.com/bygui86/spring-testing-contracts-stubs)
@@ -26,6 +36,8 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 ## links
 [DONE]
 * theory
+	* https://martinfowler.com/bliki/UnitTest.html
+	* https://martinfowler.com/bliki/TestDouble.html
 	* https://www.martinfowler.com/articles/mocksArentStubs.html
 * tests separation
 	* https://www.testwithspring.com/lesson/running-integration-tests-with-maven/
@@ -69,10 +81,11 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 	* https://books.sonatype.com/mvnref-book/reference/resource-filtering-sect-properties.html
 
 [IN-PROGRESS]
-* security config testing
-	* ?
 
 [TODO]
+* theory
+	* https://martinfowler.com/bliki/IntegrationTest.html
+	* https://martinfowler.com/articles/practical-test-pyramid.html
 * unit/integration testing
 	* https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html
 	* https://dzone.com/articles/how-to-mock-spring-bean-version-2
@@ -99,6 +112,7 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 * junit5
 	* https://www.baeldung.com/junit-5
 	* https://www.infoq.com/articles/deep-dive-junit5-extensions?utm_source=infoqEmail&utm_medium=SpecialNL_EditorialContent&utm_campaign=08272018_SpecialNL&forceSponsorshipId=1656
+	* http://minborgsjavapot.blogspot.com/2018/10/blow-up-your-junit-tests-with.html?m=1
 
 ---
 
