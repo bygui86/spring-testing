@@ -1,5 +1,6 @@
 package com.rabbit.samples.employeeservice.unittests.web.controllers;
 
+import com.rabbit.samples.employeeservice.constants.ProfileConstants;
 import com.rabbit.samples.employeeservice.persistence.entities.Employee;
 import com.rabbit.samples.employeeservice.services.EmployeeService;
 import com.rabbit.samples.employeeservice.utils.JsonUtil;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -33,6 +35,7 @@ import java.util.List;
 	In most of the cases, @WebMvcTest will be limited to bootstrap a single controller.
  */
 @WebMvcTest(EmployeeRestController.class)
+@ActiveProfiles(ProfileConstants.SPRING_PROFILE_TEST)
 public class EmployeeRestControllerUnitTest {
 
 	/*
@@ -96,8 +99,9 @@ public class EmployeeRestControllerUnitTest {
 		;
 
 		// verify
-		BDDMockito.verify(employeeService, VerificationModeFactory.times(1)).getAll();
-		BDDMockito.reset(employeeService);
+		BDDMockito
+				.verify(employeeService, VerificationModeFactory.times(1))
+				.getAll();
 	}
 
 	@Test
@@ -142,8 +146,9 @@ public class EmployeeRestControllerUnitTest {
 		;
 
 		// verify
-		BDDMockito.verify(employeeService, VerificationModeFactory.times(1)).getByName(BDDMockito.any());
-		BDDMockito.reset(employeeService);
+		BDDMockito
+				.verify(employeeService, VerificationModeFactory.times(1))
+				.getByName(BDDMockito.any());
 	}
 
 	@Test
@@ -197,8 +202,9 @@ public class EmployeeRestControllerUnitTest {
 		;
 
 		// verify
-		BDDMockito.verify(employeeService, VerificationModeFactory.times(1)).save(alex);
-		BDDMockito.reset(employeeService);
+		BDDMockito
+				.verify(employeeService, VerificationModeFactory.times(1))
+				.save(alex);
 	}
 
 }

@@ -83,7 +83,7 @@ public class RestTemplateNicknameServiceUnitTest {
 	private int port;
 
 	@After
-	public void after() {
+	public void tearDown() {
 
 		mockRestServiceServer.reset();
 	}

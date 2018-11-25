@@ -3,15 +3,12 @@
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-	<!-- custom -->
-	<logger name="com.rabbit.samples.employeeservice" level="error"/>
-
-	<!-- spring-->
-	<logger name="org.springframework" level="error"/>
-
-	<!-- others -->
-	<logger name="org.hibernate" level="error"/>
-	<logger name="org.xnio" level="error"/>
-	<logger name="io.undertow" level="error"/>
-	<logger name="com.zaxxer" level="error"/>
+	<!-- root -->
+	<logger name="root" level="error"/>
+	<!--<logger name="com.rabbit.samples.employeeservice" level="error"/>-->
+	<!--<logger name="org.springframework" level="error"/>-->
+	<!--<logger name="org.hibernate" level="error"/>-->
+	<!--<logger name="org.xnio" level="error"/>-->
+	<!--<logger name="io.undertow" level="error"/>-->
+	<!--<logger name="com.zaxxer" level="error"/>-->
 </configuration>

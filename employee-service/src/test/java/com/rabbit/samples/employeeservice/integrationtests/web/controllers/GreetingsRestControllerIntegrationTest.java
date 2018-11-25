@@ -1,6 +1,7 @@
 package com.rabbit.samples.employeeservice.integrationtests.web.controllers;
 
 import com.rabbit.samples.employeeservice.EmployeeServiceApplication;
+import com.rabbit.samples.employeeservice.constants.ProfileConstants;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +11,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
@@ -18,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 		webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
 		classes = EmployeeServiceApplication.class
 )
+@ActiveProfiles(ProfileConstants.SPRING_PROFILE_TEST)
 public class GreetingsRestControllerIntegrationTest {
 
 	// alternative to @Value("${server.port}"), use following
@@ -27,7 +30,7 @@ public class GreetingsRestControllerIntegrationTest {
 	String url;
 
 	@Before
-	public void before() {
+	public void setUp() {
 
 		url = "http://localhost:" + serverPort + "/";
 	}

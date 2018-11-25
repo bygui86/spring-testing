@@ -1,5 +1,6 @@
 package com.rabbit.samples.employeeservice.integrationtests.repos;
 
+import com.rabbit.samples.employeeservice.constants.ProfileConstants;
 import com.rabbit.samples.employeeservice.persistence.entities.Employee;
 import com.rabbit.samples.employeeservice.persistence.repos.EmployeeRepository;
 import org.assertj.core.api.Assertions;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 		. performing an @EntityScan
 		. turning on SQL logging
  */
+@ActiveProfiles(ProfileConstants.SPRING_PROFILE_TEST)
 @DataJpaTest
 @Transactional
 /*
@@ -60,7 +63,7 @@ public class EmployeeRepositoryIntegrationTest {
 	final String name = "alex";
 
 	@Before
-	public void before() {
+	public void setUp() {
 
 		entityManager.persist(Employee.builder().name(name).build());
 		entityManager.flush();

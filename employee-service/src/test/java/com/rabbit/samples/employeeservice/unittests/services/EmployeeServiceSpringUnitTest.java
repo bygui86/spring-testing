@@ -61,8 +61,9 @@ public class EmployeeServiceSpringUnitTest {
 				.isEqualTo(name);
 
 		// verify
-		BDDMockito.verify(employeeRepository, VerificationModeFactory.times(1)).findByName(name);
-		BDDMockito.reset(employeeRepository);
+		BDDMockito
+				.verify(employeeRepository, VerificationModeFactory.times(1))
+				.findByName(name);
 	}
 
 }

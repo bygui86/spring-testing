@@ -1,29 +1,132 @@
 # Spring Testing sample project
 
-Here we are exploring the different possibilities offered by some test frameworks.
-PLEASE NOTE: There is no complete test coverage, this is the purpose of this sample project.
+## Desciption
+In this sample project we are exploring the different testing techniques using some test frameworks.
 
-## topics
-* spring boot
-* spring boot test
-* testing
-	* unit tests
-	* integration tests
-	* contract tests
-* spring testing
-* mockito
-* assertj
-* spring cloud contract
+###### PLEASE NOTE: The purpose of this sample project is not to achieve a complete test coverage!
+
+---
+
+## Tech stack
+
+#### Application
+* Java 11 (no modules)
+* Maven Wrapper 3.x
+* Spring Boot 2.1.x
+
+#### Testing
+* JUnit 4
+* Mockito
+* Assertj Assertions
+* Spring Boot test
+* Spring Cloud Contract
+
+---
+
+## Build & run
+
+#### Pre-requisites
+No specific pre-requisites
+
+#### Make (in every sub-project)
+* just compile
+
+		make clean compile
+
+* build and run unit tests
+
+		make clean build
+
+* install
+
+		make install
+
+* run
+
+		make run
+
+* debug
+
+		make debug
+
+* run integration tests
+
+		make integration-test
+
+* run all tests
+
+		make test
+
+* docker
+	* build image
+	
+			make docker-build
+	
+	* run container
+	
+			make docker-run
+	
+	* run container as daemon
+	
+			make docker-run-daemon
+	
+	* stop daemon container
+	
+			make docker-stop
+
+#### Maven & Docker (in every sub-project)
+* just compile
+
+		./mvnw clean compile
+
+* build and run unit tests
+
+		./mvnw -Dtest=*UnitTest clean package
+
+* install
+
+		./mvnw clean install
+
+* run
+
+		./mvnw spring-boot:run -DskipTests -Dspring-boot.run.jvmArguments='$(MEM_OPTS) $(JMX_OPTS) $(OTHER_OPTS)'
+
+* debug
+
+		./mvnw spring-boot:run -DskipTests -Dspring-boot.run.jvmArguments='$(MEM_OPTS) $(JMX_OPTS) $(OTHER_OPTS) -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=$(IMAGE_DEBUG_PORT)'
+
+* run integration tests
+
+		./mvnw -Dtest=*IntegrationTest -DfailIfNoTests=false test
+
+* run all tests
+
+		./mvnw test
+
+* docker
+	* build image
+
+			./mvnw clean package
+			docker build -f Dockerfile_local -t $(IMAGE_NAME):$(IMAGE_TAG) .
+	
+	* run container
+	
+			docker run --rm -it --name $(NAME) $(DOCKER_IMAGE_PORTS) --net bridge --add-host=$(DOCKER_HOST):$(DOCKER_IP) $(IMAGE_NAME):$(IMAGE_TAG)
+	
+	* run container as daemon
+	
+			docker run --rm -d --name $(NAME) $(DOCKER_IMAGE_PORTS) --net bridge --add-host=$(DOCKER_HOST):$(DOCKER_IP) $(IMAGE_NAME):$(IMAGE_TAG)
+	
+	* stop daemon container
+	
+			docker container stop -f $(NAME)
 
 ---
 
 ## TODOs
-* config tests
-* security config tests
-* startup tests
-* remove "reset(..)" from all tests (deprecated and not best pratice)
-* mutation testing
-* random testing
+* fix issue on contract testing
+* random testing (?)
+* test containers
 
 ---
 
@@ -33,8 +136,9 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 
 ---
 
-## links
-[DONE]
+## Links
+
+###### DONE
 * theory
 	* https://martinfowler.com/bliki/UnitTest.html
 	* https://martinfowler.com/bliki/TestDouble.html
@@ -80,9 +184,10 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 * maven properties
 	* https://books.sonatype.com/mvnref-book/reference/resource-filtering-sect-properties.html
 
-[IN-PROGRESS]
+###### IN-PROG
+/
 
-[TODO]
+###### TODO
 * theory
 	* https://martinfowler.com/bliki/IntegrationTest.html
 	* https://martinfowler.com/articles/practical-test-pyramid.html
@@ -114,19 +219,7 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 	* https://www.infoq.com/articles/deep-dive-junit5-extensions?utm_source=infoqEmail&utm_medium=SpecialNL_EditorialContent&utm_campaign=08272018_SpecialNL&forceSponsorshipId=1656
 	* http://minborgsjavapot.blogspot.com/2018/10/blow-up-your-junit-tests-with.html?m=1
 
----
-
-## Repos
-* https://github.com/spring-cloud-samples/spring-cloud-contract-samples/
-	* https://github.com/spring-cloud-samples/spring-cloud-contract-samples/tree/master/consumer
-	* https://github.com/spring-cloud-samples/spring-cloud-contract-samples/tree/master/producer
-* https://github.com/hamvocke/spring-testing
-* https://github.com/importsource/spring-cloud-contract
-* https://github.com/paolocarta/spring-cloud-contract-demo
-
----
-
-## Issues
+#### Issues
 * https://github.com/spring-projects/spring-boot/issues/6541
 * https://moelholm.com/2016/10/22/spring-boot-separating-tests/
 * https://stackoverflow.com/questions/47979589/spring-data-jpa-generate-id-on-database-side-only-before-create
@@ -135,3 +228,11 @@ PLEASE NOTE: There is no complete test coverage, this is the purpose of this sam
 * https://www.concretepage.com/questions/535
 * https://www.mkyong.com/java/jackson-2-convert-java-object-to-from-json/
 * https://stackoverflow.com/questions/43093968/enablefeignclients-and-feignclient-fail-on-autowiring-feigncontext-nosuchbea
+
+#### Repos
+* https://github.com/spring-cloud-samples/spring-cloud-contract-samples/
+	* https://github.com/spring-cloud-samples/spring-cloud-contract-samples/tree/master/consumer
+	* https://github.com/spring-cloud-samples/spring-cloud-contract-samples/tree/master/producer
+* https://github.com/hamvocke/spring-testing
+* https://github.com/importsource/spring-cloud-contract
+* https://github.com/paolocarta/spring-cloud-contract-demo

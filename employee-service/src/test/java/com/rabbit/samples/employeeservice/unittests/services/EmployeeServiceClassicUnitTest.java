@@ -39,7 +39,9 @@ public class EmployeeServiceClassicUnitTest {
 				.isEqualTo(name);
 
 		// verify
-		BDDMockito.verify(employeeRepository, VerificationModeFactory.times(1)).findByName(name);
+		BDDMockito
+				.verify(employeeRepository, VerificationModeFactory.times(1))
+				.findByName(name);
 	}
 
 }

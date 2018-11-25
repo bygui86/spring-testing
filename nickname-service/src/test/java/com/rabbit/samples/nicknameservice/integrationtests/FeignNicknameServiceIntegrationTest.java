@@ -68,7 +68,7 @@ public class FeignNicknameServiceIntegrationTest {
 	private int port;
 
 	@Before
-	public void before() {
+	public void setUp() {
 
 		clientAndServer = ClientAndServer.startClientAndServer(port);
 
@@ -77,7 +77,7 @@ public class FeignNicknameServiceIntegrationTest {
 	}
 
 	@After
-	public void after() {
+	public void tearDown() {
 
 		clientAndServer.stop();
 

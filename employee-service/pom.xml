@@ -49,20 +49,26 @@
 
 		<!-- maven -->
 		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+		<pitest-maven-plugin.version>1.4.2</pitest-maven-plugin.version>
 
 		<!-- spring -->
-		<spring-boot.version>2.0.4.RELEASE</spring-boot.version>
+		<spring-boot.version>2.1.0.RELEASE</spring-boot.version>
 		<spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+
+		<!-- swagger -->
+		<swagger.version>2.9.2</swagger.version>
 
 		<!-- logging -->
 		<slf4.version>1.7.25</slf4.version>
 
 		<!-- others -->
 		<mapstruct.version>1.2.0.Final</mapstruct.version>
-		<lombok.version>1.18.0</lombok.version>
+		<lombok.version>1.18.2</lombok.version>
 
 		<!-- testing -->
 		<spring-cloud-contract.version>2.0.1.RELEASE</spring-cloud-contract.version>
+		<rest-assured.version>3.2.0</rest-assured.version>
+		<rest-assured-spring-mock-mvc.version>3.0.0</rest-assured-spring-mock-mvc.version>
 	</properties>
 
 	<dependencyManagement>
@@ -123,6 +129,18 @@
 			<artifactId>h2</artifactId>
 		</dependency>
 
+		<!-- swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+
 		<!-- logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -153,6 +171,18 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-contract-verifier</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>${rest-assured.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>spring-mock-mvc</artifactId>
+			<version>${rest-assured-spring-mock-mvc.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -222,96 +252,146 @@
 			</plugin>
 
 			<!-- spring-cloud-contract -->
+			<!--<plugin>-->
+			<!--<groupId>org.springframework.cloud</groupId>-->
+			<!--<artifactId>spring-cloud-contract-maven-plugin</artifactId>-->
+			<!--<version>${spring-cloud-contract.version}</version>-->
+			<!--<extensions>true</extensions>-->
+			<!--<configuration>-->
+
+			<!--&lt;!&ndash; general &ndash;&gt;-->
+
+			<!--<nameSuffixForTests>ContractTest</nameSuffixForTests>-->
+
+
+			<!--&lt;!&ndash; repo &ndash;&gt;-->
+
+			<!--&lt;!&ndash; We want to pick contracts from a Git repository &ndash;&gt;-->
+			<!--&lt;!&ndash; via FILE - STILL TO BE TESTED &ndash;&gt;-->
+			<!--&lt;!&ndash;<contractsRepositoryUrl>file://${env.ROOT}/contracts-stubs</contractsRepositoryUrl>&ndash;&gt;-->
+			<!--&lt;!&ndash;<contractsRepositoryUrl>git://file://${env.ROOT}/contracts-stubs</contractsRepositoryUrl>&ndash;&gt;-->
+			<!--&lt;!&ndash; via GIT protocol &ndash;&gt;-->
+			<!--&lt;!&ndash; /!\   WARNING: you need a already setup ssh-key locally and on GitHub   /!\ &ndash;&gt;-->
+			<!--&lt;!&ndash;<contractsRepositoryUrl>git://git@github.com:bygui86/spring-testing-contracts-stubs.git</contractsRepositoryUrl>&ndash;&gt;-->
+			<!--&lt;!&ndash; via HTTP protocol &ndash;&gt;-->
+			<!--&lt;!&ndash; /!\   WARNING: you need an already setup environment variables locally: MAVEN_GIT_USERNAME and MAVEN_GIT_PASSWORD   /!\ &ndash;&gt;-->
+			<!--&lt;!&ndash;<contractsRepositoryUrl>git://https://github.com/bygui86/spring-testing-contracts-stubs.git</contractsRepositoryUrl>&ndash;&gt;-->
+			<!--&lt;!&ndash;<contractsRepositoryUsername>${env.MAVEN_GIT_USERNAME}</contractsRepositoryUsername>&ndash;&gt;-->
+			<!--&lt;!&ndash;<contractsRepositoryPassword>${env.MAVEN_GIT_PASSWORD}</contractsRepositoryPassword>&ndash;&gt;-->
+
+
+			<!--&lt;!&ndash; contract dependency &ndash;&gt;-->
+
+			<!--&lt;!&ndash;-->
+			<!--We reuse the contract dependency section to set up the path to the folder that contains the contract definitions.-->
+			<!--In our case the path will be /groupId/artifactId/version/contracts-->
+			<!--&ndash;&gt;-->
+			<!--<contractDependency>-->
+			<!--<groupId>${project.groupId}</groupId>-->
+			<!--<artifactId>${project.artifactId}</artifactId>-->
+			<!--<version>${project.version}</version>-->
+			<!--</contractDependency>-->
+
+
+			<!--&lt;!&ndash; The contracts mode can't be classpath &ndash;&gt;-->
+
+			<!--&lt;!&ndash; local &ndash;&gt;-->
+			<!--<contractsMode>LOCAL</contractsMode>-->
+			<!--&lt;!&ndash; remote repo &ndash;&gt;-->
+			<!--&lt;!&ndash;<contractsMode>REMOTE</contractsMode>&ndash;&gt;-->
+
+
+			<!--&lt;!&ndash; base class mappings &ndash;&gt;-->
+
+			<!--&lt;!&ndash; Different base classes for contracts - by mapping &ndash;&gt;-->
+			<!--&lt;!&ndash; PLEASE NOTE: This rule takes precedence over baseClassForTests and packageWithBaseClasses &ndash;&gt;-->
+			<!--<baseClassMappings>-->
+			<!--<baseClassMapping>-->
+			<!--<contractPackageRegex>.*employee.*</contractPackageRegex>-->
+			<!--<baseClassFQN>com.rabbit.samples.employeeservice.contracttests.basepackage.EmployeesBase</baseClassFQN>-->
+			<!--</baseClassMapping>-->
+			<!--<baseClassMapping>-->
+			<!--<contractPackageRegex>.*greetings.*</contractPackageRegex>-->
+			<!--<baseClassFQN>com.rabbit.samples.employeeservice.contracttests.basepackage.GreetingsBase</baseClassFQN>-->
+			<!--</baseClassMapping>-->
+			<!--<baseClassMapping>-->
+			<!--<contractPackageRegex>.*info.*</contractPackageRegex>-->
+			<!--<baseClassFQN>com.rabbit.samples.employeeservice.contracttests.basepackage.InfoBase</baseClassFQN>-->
+			<!--</baseClassMapping>-->
+			<!--</baseClassMappings>-->
+
+			<!--&lt;!&ndash; Different base classes for contracts - by convention &ndash;&gt;-->
+			<!--&lt;!&ndash; PLEASE NOTE: This rule takes precedence over baseClassForTests &ndash;&gt;-->
+			<!--&lt;!&ndash; /!\   WARNING: This rule does not work well retrieving contracts from repo   /!\ &ndash;&gt;-->
+			<!--&lt;!&ndash;<packageWithBaseClasses>com.rabbit.samples.employeeservice.contracttests.basepackage</packageWithBaseClasses>&ndash;&gt;-->
+
+			<!--&lt;!&ndash; Fallback - Providing the baseClassForTests, we have a fallback in case mappings did not succeed. &ndash;&gt;-->
+			<!--<baseClassForTests>com.rabbit.samples.employeeservice.contracttests.GenericBase</baseClassForTests>-->
+			<!--</configuration>-->
+			<!--&lt;!&ndash;<executions>&ndash;&gt;-->
+			<!--&lt;!&ndash;<execution>&ndash;&gt;-->
+			<!--&lt;!&ndash;<phase>package</phase>&ndash;&gt;-->
+			<!--&lt;!&ndash;<phase>install</phase>&ndash;&gt;-->
+			<!--&lt;!&ndash;<goals>&ndash;&gt;-->
+			<!--&lt;!&ndash; By default we will not push the stubs back to SCM, you have to explicitly add it as a goal &ndash;&gt;-->
+			<!--&lt;!&ndash;<goal>pushStubsToScm</goal>&ndash;&gt;-->
+			<!--&lt;!&ndash;</goals>&ndash;&gt;-->
+			<!--&lt;!&ndash;</execution>&ndash;&gt;-->
+			<!--&lt;!&ndash;</executions>&ndash;&gt;-->
+			<!--</plugin>-->
+
+			<!-- pitest - mutation testing -->
+			<!--
+				PLEASE NOTE:
+				Even though mutation testing reveals defects in code, it should be used wisely,
+				because it is an extremely costly and time-consuming process.
+			 -->
 			<plugin>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
-				<version>${spring-cloud-contract.version}</version>
-				<extensions>true</extensions>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>${pitest-maven-plugin.version}</version>
 				<configuration>
-					<!-- general -->
-					<nameSuffixForTests>ContractTest</nameSuffixForTests>
-
-
-					<!-- repo -->
-
-					<!-- We want to pick contracts from a Git repository -->
-					<!-- via FILE - STILL TO BE TESTED -->
-					<!--<contractsRepositoryUrl>file://${env.ROOT}/contracts-stubs</contractsRepositoryUrl>-->
-					<!--<contractsRepositoryUrl>git://file://${env.ROOT}/contracts-stubs</contractsRepositoryUrl>-->
-					<!-- via GIT protocol -->
-					<!-- /!\   WARNING: you need a already setup ssh-key locally and on GitHub   /!\ -->
-					<contractsRepositoryUrl>git://git@github.com:bygui86/spring-testing-contracts-stubs.git</contractsRepositoryUrl>
-					<!-- via HTTP protocol -->
-					<!-- /!\   WARNING: you need an already setup environment variables locally: MAVEN_GIT_USERNAME and MAVEN_GIT_PASSWORD   /!\ -->
-					<!--<contractsRepositoryUrl>git://https://github.com/bygui86/spring-testing-contracts-stubs.git</contractsRepositoryUrl>-->
-					<!--<contractsRepositoryUsername>${env.MAVEN_GIT_USERNAME}</contractsRepositoryUsername>-->
-					<!--<contractsRepositoryPassword>${env.MAVEN_GIT_PASSWORD}</contractsRepositoryPassword>-->
-
-					<!--
-						We reuse the contract dependency section to set up the path to the folder that contains the contract definitions.
-						In our case the path will be /groupId/artifactId/version/contracts
-					 -->
-					<contractDependency>
-						<groupId>${project.groupId}</groupId>
-						<artifactId>${project.artifactId}</artifactId>
-						<version>${project.version}</version>
-					</contractDependency>
-
-					<!-- The contracts mode can't be classpath -->
-					<contractsMode>REMOTE</contractsMode>
-
-
-					<!-- base class mappings -->
-
-					<!-- Different base classes for contracts - by mapping -->
-					<!-- PLEASE NOTE: This rule takes precedence over baseClassForTests and packageWithBaseClasses -->
-					<baseClassMappings>
-						<baseClassMapping>
-							<contractPackageRegex>.*employee.*</contractPackageRegex>
-							<baseClassFQN>com.rabbit.samples.employeeservice.contracttests.basepackage.EmployeesBase</baseClassFQN>
-						</baseClassMapping>
-						<baseClassMapping>
-							<contractPackageRegex>.*greetings.*</contractPackageRegex>
-							<baseClassFQN>com.rabbit.samples.employeeservice.contracttests.basepackage.GreetingsBase</baseClassFQN>
-						</baseClassMapping>
-						<baseClassMapping>
-							<contractPackageRegex>.*info.*</contractPackageRegex>
-							<baseClassFQN>com.rabbit.samples.employeeservice.contracttests.basepackage.InfoBase</baseClassFQN>
-						</baseClassMapping>
-					</baseClassMappings>
-
-					<!-- Different base classes for contracts - by convention -->
-					<!-- PLEASE NOTE: This rule takes precedence over baseClassForTests -->
-					<!-- /!\   WARNING: This rule does not work well retrieving contracts from repo   /!\ -->
-					<!--<packageWithBaseClasses>com.rabbit.samples.employeeservice.contracttests.basepackage</packageWithBaseClasses>-->
-
-					<!-- Fallback - Providing the baseClassForTests, we have a fallback in case mappings did not succeed. -->
-					<baseClassForTests>com.rabbit.samples.employeeservice.contracttests.GenericBase</baseClassForTests>
-
+					<withHistory>true</withHistory>
+					<timestampedReports>false</timestampedReports>
+					<outputFormats>
+						<outputFormat>HTML</outputFormat>
+						<outputFormat>XML</outputFormat>
+					</outputFormats>
+					<failWhenNoMutations>true</failWhenNoMutations>
+					<mutationThreshold>50</mutationThreshold>
+					<avoidCallsTo>
+						<avoidCallsTo>java</avoidCallsTo>
+						<avoidCallsTo>org.apache</avoidCallsTo>
+						<avoidCallsTo>org.slf4j</avoidCallsTo>
+						<avoidCallsTo>org.eclipse</avoidCallsTo>
+						<avoidCallsTo>lombok</avoidCallsTo>
+						<avoidCallsTo>org.springframework</avoidCallsTo>
+					</avoidCallsTo>
+					<excludedClasses>
+						<!-- generic exclusions -->
+						<excludedClass>*constants*</excludedClass>
+						<excludedClass>*domain*</excludedClass>
+						<excludedClass>*entities*</excludedClass>
+						<excludedClass>*daos*</excludedClass>
+						<excludedClass>*dtos*</excludedClass>
+						<excludedClass>*Mock*</excludedClass>
+						<!-- special exclusions -->
+						<!-- none -->
+					</excludedClasses>
 				</configuration>
-				<executions>
-					<execution>
-						<!--<phase>package</phase>-->
-						<phase>install</phase>
-						<goals>
-							<!-- By default we will not push the stubs back to SCM, you have to explicitly add it as a goal -->
-							<goal>pushStubsToScm</goal>
-						</goals>
-					</execution>
-				</executions>
+				<!-- Execution to configure pitest:mutationCoverage to be executed at the end of maven test phase -->
+				<!--<executions>-->
+				<!--<execution>-->
+				<!--<id>pitest-mutation-coverage</id>-->
+				<!--<phase>test</phase>-->
+				<!--<goals>-->
+				<!--<goal>mutationCoverage</goal>-->
+				<!--</goals>-->
+				<!--</execution>-->
+				<!--</executions>-->
 			</plugin>
-		</plugins>
 
-		<!-- PLEASE NOTE: usage of properties not allowed, probably a bug in JenkinsX -->
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.8.2</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+		</plugins>
 	</build>
 
 </project>

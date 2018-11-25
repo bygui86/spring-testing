@@ -1,6 +1,7 @@
 package com.rabbit.samples.employeeservice.integrationtests.web.controllers;
 
 import com.rabbit.samples.employeeservice.EmployeeServiceApplication;
+import com.rabbit.samples.employeeservice.constants.ProfileConstants;
 import com.rabbit.samples.employeeservice.persistence.entities.Employee;
 import com.rabbit.samples.employeeservice.persistence.repos.EmployeeRepository;
 import com.rabbit.samples.employeeservice.utils.JsonUtil;
@@ -16,6 +17,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -37,6 +39,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 )
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase
+@ActiveProfiles(ProfileConstants.SPRING_PROFILE_TEST)
 /*
 	We can use the @TestPropertySource annotation to configure locations of properties files specific to our tests.
 
@@ -58,14 +61,14 @@ public class EmployeeRestControllerIntegrationTest {
 	private EmployeeRepository employeeRepository;
 
 	@Before
-	public void before() {
+	public void setUp() {
 
 		// reset DB
 		employeeRepository.deleteAll();
 	}
 
 	@After
-	public void after() {
+	public void tearDown() {
 
 		// reset DB
 		employeeRepository.deleteAll();
